@@ -16,6 +16,7 @@ module.exports = app => {
     */
     let result = '';
     try {
+      // eval here is the sink
       result = require('util').inspect(eval(req.query.userInput));
     } catch (ex) {
       console.error(ex);
