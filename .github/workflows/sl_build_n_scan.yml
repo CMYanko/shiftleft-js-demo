@@ -29,9 +29,10 @@ jobs:
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
     - name: Validate Build Rules
-      run: ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-js-demo --target tag.branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --report
+      run: ${GITHUB_WORKSPACE}/sl check-analysis --app shiftleft-js-demo --target tag.branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --report --github-pr-user ${{ github.repository_owner }} --github-pr-repo ${{ github.event.repository.name }} --github-pr-number ${{github.event.number}}
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
         SHIFTLEFT_GH_PR_REPO_OWNER: ${{ github.repository_owner }}
         SHIFTLEFT_GH_PR_REPO_NAME: ${{ github.event.repository.name }}
         SHIFTLEFT_GH_PR_NUMBER: ${{github.event.number}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
